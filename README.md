@@ -1,4 +1,13 @@
-## This is our final project.
+# G06 語言所25年惹？
+成員：陳敬宜、呂曉鈞、陳柔安、黃山
+
+# 小組期末專案
+
+## 繳交項目
+[ ] 原始碼及數據
+[ ] 書面報告
+[ ] 海報 (海報組)
+
 
 You can click [this link](https://jouanc99.github.io/final_project/wordscloud.html) or [this one](https://jouanc99.github.io/final_project/c.html#1) to open the html directly.
 
