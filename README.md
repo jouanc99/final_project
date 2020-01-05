@@ -4,9 +4,16 @@
 # 小組期末專案
 
 ## 繳交項目
-[ ] 原始碼及數據
-[ ] 書面報告
-[ ] 海報 (海報組)
+- [ ] 原始碼及數據
+- 檔名：G06_report.pdf
+- 格式：.pdf
+- 請將此檔案放在此 repo 根目錄
+
+- [ ] 書面報告
+- 檔名：G06_poster.pdf
+- 格式：.pdf
+- 請將此檔案放在此 repo 根目錄
+- [ ] 海報
 
 
 You can click [this link](https://jouanc99.github.io/final_project/wordscloud.html) or [this one](https://jouanc99.github.io/final_project/c.html#1) to open the html directly.
