@@ -18,4 +18,23 @@ for (i in seq_along(fps1)) {
 # 製作df
 to1500 <- tibble::tibble(id = seq_along(contents1), content = contents1)
 ```
+## 斷詞
+```{r}
+#詞頻
+to1500<-to1500 %>%
+  unnest_tokens(output="word",
+                input="content", 
+                token="regex",
+                pattern = " ")  
+
+#計算出現詞彙次數
+topicword_1500<-to1500 %>% 
+  group_by(word) %>%
+  summarise(n = n()) %>%
+  arrange(desc(n))
+```
+## 製作年份最新文字雲
+```{r}
+wordcloud2(topicword_1500, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
+```
 
