@@ -15,6 +15,3 @@
 - 請將此檔案放在此 repo 根目錄
 - [ ] 海報
 
-
-You can click [this link]() or [this one]() to open the html directly.
-
