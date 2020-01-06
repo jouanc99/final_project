@@ -48,7 +48,7 @@ topicword_1500_idiom<-to1500_idiom %>%
   summarise(n = n()) %>%
   arrange(desc(n))
 
-#製作年份最新文字雲
+#製作年份最新四字文字雲
 wordcloud2(topicword_1500_idiom, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
 ### 以同樣匯入資料、製作df與斷詞方法製作次新、次舊、最舊文字雲
@@ -86,7 +86,7 @@ topicword_6000<-to6000 %>%
   summarise(n = n()) %>%
   arrange(desc(n))
 
-#製作年份次舊的文字雲
+#製作年份次舊二字文字雲
 wordcloud2(topicword_6000, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
 
@@ -99,7 +99,7 @@ topicword_6000_idiom<-to6000_idiom %>%
   summarise(n = n()) %>%
   arrange(desc(n))
 
-#製作年份次舊文字雲
+#製作年份次舊四字文字雲
 wordcloud2(topicword_6000_idiom, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
 
@@ -137,7 +137,7 @@ topicword_end<-end %>%
   summarise(n = n()) %>%
   arrange(desc(n))
 
-#製作年份最舊的文字雲
+#製作年份最舊二字文字雲
 wordcloud2(topicword_end, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
 
@@ -150,10 +150,11 @@ topicword_end_idiom<-end_idiom %>%
   summarise(n = n()) %>%
   arrange(desc(n))
 
-#製作年份最舊文字雲
+#製作年份最舊四字文字雲
 wordcloud2(topicword_end_idiom, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
 
+## 以同樣匯入資料方法製作臺灣外交部df
 ```{r}
 fps01 <- list.files("TW", full.names = T)
 # Initialize jiebaR and the dictionary
@@ -173,4 +174,39 @@ for (i in seq_along(fps01)) {
 
 # Combine results into a df
 docs_df01 <- tibble::tibble(id = seq_along(contents01), content = contents01)
+```
+
+### 製作臺灣外交部二字+文字雲
+```{r}
+#詞頻
+taiwan<-docs_df01 %>%
+  unnest_tokens(output="word",  
+                input="content",  
+                token="regex",
+                pattern = " ")
+
+taiwan2<-taiwan %>% filter(str_detect(taiwan$word, ".{2}"))
+
+#計算出現詞彙次數
+topicword_taiwan2<-taiwan2 %>% 
+  group_by(word) %>%
+  summarise(n = n()) %>%
+  arrange(desc(n))
+
+#製作文字雲
+wordcloud2(topicword_taiwan2, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
+```
+
+### 製作臺灣外交部四字+文字雲
+```{r}
+taiwan4<-taiwan %>% filter(str_detect(taiwan$word, ".{4}+"))
+
+#計算出現詞彙次數
+topicword_taiwan4<-taiwan4 %>% 
+  group_by(word) %>%
+  summarise(n = n()) %>%
+  arrange(desc(n))
+
+#製作文字雲
+wordcloud2(topicword_taiwan4, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
