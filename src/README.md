@@ -55,6 +55,61 @@ wordcloud2(topicword_1500_idiom, color = "random-light",fontFamily = "微軟正�
 ```
 
 ### 以同樣匯入資料、製作df與斷詞方法製作次新、次舊、最舊文字雲
+
+### 1500-3000行
+```{r}
+fps2 <- list.files("GS66/30", full.names = T)
+# Initialize jiebaR and the dictionary
+seg2<-worker(user="keywords.txt",stop_word = "stopwords.txt")
+
+# Initialize empty vector to use in for loop
+contents2 <- vector("character", length(fps2))
+
+for (i in seq_along(fps2)) {
+  # Read post from file
+  post2 <- readLines(fps2[i], encoding = "UTF-8")
+  
+  # Segment post
+  segged2 <- segment(post2, seg2)
+  contents2[i] <- paste(segged2, collapse = " ")
+}
+
+# Combine results into a df
+to4500 <- tibble::tibble(id = seq_along(contents2), content = contents2)
+
+#詞頻
+to4500<-to4500 %>%
+  unnest_tokens(output="word", 
+                input="content",
+                token="regex",
+                pattern = " ") 
+
+#計算出現詞彙次數
+topicword_4500<-to4500 %>% 
+  group_by(word) %>%
+  summarise(n = n()) %>%
+  arrange(desc(n))
+```
+
+### 製作年份次新二字文字雲
+```{r}
+wordcloud2(topicword_4500, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")#顏色和背景
+```
+
+```{r}
+to4500_idiom<-to4500 %>% filter(str_detect(to4500$word, ".{4}"))
+
+#計算出現詞彙次數
+topicword_4500_idiom<-to4500_idiom %>% 
+  group_by(word) %>%
+  summarise(n = n()) %>%
+  arrange(desc(n))
+```
+
+### 製作年份次新四字文字雲
+```{r}
+wordcloud2(topicword_4500_idiom, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
+```
 #### 3000-4500行
 ```{r}
 fps3 <- list.files("GS66/45", full.names = T)
