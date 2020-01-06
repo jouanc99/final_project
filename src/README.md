@@ -33,7 +33,7 @@ topicword_1500<-to1500 %>%
   summarise(n = n()) %>%
   arrange(desc(n))
 ```
-## 製作年份最新二字+文字雲
+### 製作年份最新二字+文字雲
 ```{r}
 wordcloud2(topicword_1500, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
@@ -47,13 +47,16 @@ topicword_1500_idiom<-to1500_idiom %>%
   group_by(word) %>%
   summarise(n = n()) %>%
   arrange(desc(n))
-
-#製作年份最新四字文字雲
+  ```
+  
+### 製作年份最新四字文字雲
+```{r}
 wordcloud2(topicword_1500_idiom, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
+
 ### 以同樣匯入資料、製作df與斷詞方法製作次新、次舊、最舊文字雲
+#### 3000-4500行
 ```{r}
-#3001to4500行
 fps3 <- list.files("GS66/45", full.names = T)
 # Initialize jiebaR and the dictionary
 seg3<-worker(user="keywords.txt",stop_word = "stopwords.txt")
@@ -85,8 +88,10 @@ topicword_6000<-to6000 %>%
   group_by(word) %>%
   summarise(n = n()) %>%
   arrange(desc(n))
+```
 
-#製作年份次舊二字文字雲
+### 製作年份次舊二字文字雲
+```{r}
 wordcloud2(topicword_6000, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
 
@@ -98,13 +103,15 @@ topicword_6000_idiom<-to6000_idiom %>%
   group_by(word) %>%
   summarise(n = n()) %>%
   arrange(desc(n))
+```
 
-#製作年份次舊四字文字雲
+### 製作年份次舊四字文字雲
+```{r}
 wordcloud2(topicword_6000_idiom, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
 
+### 4500-6757行
 ```{r}
-#to end
 fps4 <- list.files("GS66/end", full.names = T)
 # Initialize jiebaR and the dictionary
 seg4<-worker(user="keywords.txt",stop_word = "stopwords.txt")
@@ -136,8 +143,10 @@ topicword_end<-end %>%
   group_by(word) %>%
   summarise(n = n()) %>%
   arrange(desc(n))
+```
 
-#製作年份最舊二字文字雲
+### 製作年份最舊二字文字雲
+```{r}
 wordcloud2(topicword_end, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
 
@@ -149,8 +158,10 @@ topicword_end_idiom<-end_idiom %>%
   group_by(word) %>%
   summarise(n = n()) %>%
   arrange(desc(n))
+```
 
-#製作年份最舊四字文字雲
+### 製作年份最舊四字文字雲
+```{r}
 wordcloud2(topicword_end_idiom, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
 
@@ -176,7 +187,7 @@ for (i in seq_along(fps01)) {
 docs_df01 <- tibble::tibble(id = seq_along(contents01), content = contents01)
 ```
 
-### 製作臺灣外交部二字+文字雲
+## 斷詞
 ```{r}
 #詞頻
 taiwan<-docs_df01 %>%
@@ -192,12 +203,13 @@ topicword_taiwan2<-taiwan2 %>%
   group_by(word) %>%
   summarise(n = n()) %>%
   arrange(desc(n))
+```
 
-#製作文字雲
+### 製作臺灣外交部二字+文字雲
+```{r}
 wordcloud2(topicword_taiwan2, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
 
-### 製作臺灣外交部四字+文字雲
 ```{r}
 taiwan4<-taiwan %>% filter(str_detect(taiwan$word, ".{4}+"))
 
@@ -206,7 +218,9 @@ topicword_taiwan4<-taiwan4 %>%
   group_by(word) %>%
   summarise(n = n()) %>%
   arrange(desc(n))
+```
 
-#製作文字雲
+### 製作臺灣外交部四字+文字雲
+```{r}
 wordcloud2(topicword_taiwan4, color = "random-light",fontFamily = "微軟正黑體", backgroundColor = "black")
 ```
